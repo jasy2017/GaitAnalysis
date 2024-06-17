@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" 
+             xmlns:viewmodel="clr-namespace:GaitAnalysis.ViewModel" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             x:DataType="viewmodel:VMpageAnalysisResults"
+             x:Class="GaitAnalysis.Views.PageAnalysisResults"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="Moccasin"
+             xmlns:fontAwesome="clr-namespace:FontAwesome">
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*" 
+          RowSpacing="0" ColumnSpacing="0" 
+          Padding="0" Margin="0" BackgroundColor="Transparent">
+        <!-- Encabezado fijo -->
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>-->
+
+        <Frame Grid.Row="0" Padding="0" BackgroundColor="#92cace">
+            <StackLayout Orientation="Horizontal">
+                <Frame x:Name="Add"
+               HasShadow="False"
+               IsClippedToBounds="True"
+               Padding="0"
+               CornerRadius="50" HeightRequest="40" WidthRequest="50"
+               HorizontalOptions="Start"
+               VerticalOptions="Center"
+               Margin="10,6,0,0"
+               BackgroundColor="#92cace">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ComeBackMainCommand}" />
+                    </Frame.GestureRecognizers>
+                    <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
+                   FontFamily="FFS"
+                   FontSize="20"
+                   Margin="15,7,0,0"/>
+                </Frame>
+                <Label x:Name="lbName"
+               Text="RESULTADOS"
+               FontAttributes="Bold"
+               FontSize="20"
+               Margin="70,0,0,0"
+               VerticalTextAlignment="Center"
+               VerticalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+
+
+
+        <ScrollView Grid.Row="1">
+            <StackLayout>
+                <!--Trayectoria-->
+            <xct:Expander>
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Trayectoria" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                                   FontFamily="FFS"
+                                   FontSize="20"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.Content>
+                    <StackLayout>
+                        <Label Text="Trayectoria de cada articulación" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis IsInversed="true"/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding CaderaPoints}"
+                                                  XBindingPath="AnkleX"
+                                                  YBindingPath="HipY"
+                                                  Color="Blue"
+                                                  Label="Cadera"/>
+                                <chart:LineSeries ItemsSource="{Binding CaderaPoints}"
+                                                  XBindingPath="AnkleX"
+                                                  YBindingPath="KneeY"
+                                                  Color="Orange"
+                                                  Label="Rodilla"/>
+                                <chart:LineSeries ItemsSource="{Binding CaderaPoints}"
+                                                  XBindingPath="AnkleX"
+                                                  YBindingPath="AnkleY"
+                                                  Color="Green"
+                                                  Label="Tobillo"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+                    </StackLayout>
+                </xct:Expander.Content>
+            </xct:Expander>
+                
+                <!--Distancia Radial: origen-punto-->
+                <!--<xct:Expander>
+                    <xct:Expander.Header>
+                        <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Desplazamientos" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                                <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                       FontFamily="FFS"
+                       FontSize="20"
+                       HorizontalOptions="EndAndExpand"
+                       Margin="10,10"/>
+                            </StackLayout>
+                        </Frame>
+                    </xct:Expander.Header>
+                    <xct:Expander.Content>
+                        <StackLayout>
+                            --><!--Cadera--><!--
+                            <Label Text="Curva de desplazamiento de la cadera" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                            <Frame>
+                                <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                    <chart:SfChart.PrimaryAxis>
+                                        <chart:NumericalAxis/>
+                                    </chart:SfChart.PrimaryAxis>
+                                    <chart:SfChart.SecondaryAxis>
+                                        <chart:NumericalAxis/>
+                                    </chart:SfChart.SecondaryAxis>
+                                    <chart:LineSeries ItemsSource="{Binding HipDisplacement}"
+                                      XBindingPath="Time"
+                                      YBindingPath="Angle"
+                                      Color="Blue"
+                                      Label="Cadera"/>
+                                    <chart:SfChart.Legend>
+                                        <chart:ChartLegend/>
+                                    </chart:SfChart.Legend>
+                                </chart:SfChart>
+                            </Frame>
+
+                            --><!--Rodilla--><!--
+                            <Label Text="Curva de desplazamiento de la rodilla" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                            <Frame>
+                                <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                    <chart:SfChart.PrimaryAxis>
+                                        <chart:NumericalAxis/>
+                                    </chart:SfChart.PrimaryAxis>
+                                    <chart:SfChart.SecondaryAxis>
+                                        <chart:NumericalAxis/>
+                                    </chart:SfChart.SecondaryAxis>
+                                    <chart:LineSeries ItemsSource="{Binding KneeDisplacement}"
+                                      XBindingPath="Time"
+                                      YBindingPath="Angle"
+                                      Color="Blue"
+                                      Label="Rodilla"/>
+                                    <chart:SfChart.Legend>
+                                        <chart:ChartLegend/>
+                                    </chart:SfChart.Legend>
+                                </chart:SfChart>
+                            </Frame>
+
+                            --><!--Tobillo--><!--
+                            <Label Text="Curva de desplazamiento de tobillo" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                            <Frame>
+                                <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                    <chart:SfChart.PrimaryAxis>
+                                        <chart:NumericalAxis/>
+                                    </chart:SfChart.PrimaryAxis>
+                                    <chart:SfChart.SecondaryAxis>
+                                        <chart:NumericalAxis/>
+                                    </chart:SfChart.SecondaryAxis>
+                                    <chart:LineSeries ItemsSource="{Binding AnkleDisplacement}"
+                                      XBindingPath="Time"
+                                      YBindingPath="Angle"
+                                      Color="Blue"
+                                      Label="Tobillo"/>
+                                    <chart:SfChart.Legend>
+                                        <chart:ChartLegend/>
+                                    </chart:SfChart.Legend>
+                                </chart:SfChart>
+                            </Frame>
+                        </StackLayout>
+                    </xct:Expander.Content>
+                </xct:Expander>-->
+                
+            <!--Ángulos-->
+            <xct:Expander>
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Ángulos" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                                   FontFamily="FFS"
+                                   FontSize="20"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.Content>
+                    <StackLayout>
+                        <!--Cadera-->
+                        <Label Text="Curva cinemática de la cadera" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding HipAngles}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Cadera"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+
+                        <!--Rodilla-->
+                        <Label Text="Curva cinemática de la rodilla" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding KneeAngles}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Rodilla"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+
+                        <!--Tobillo-->
+                        <Label Text="Curva cinemática de tobillo" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding AnkleAngles}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Tobillo"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+                    </StackLayout>
+                </xct:Expander.Content>
+            </xct:Expander>
+
+            <!--Velocidad Lineal-->
+            <xct:Expander>
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Velocidad Lineal" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                                   FontFamily="FFS"
+                                   FontSize="20"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.Content>
+                    <StackLayout>
+                        <Label Text="Velocidades lineales" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding HipLinearVelocity}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Cadera"/>
+                                <chart:LineSeries ItemsSource="{Binding KneeLinearVelocity}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Orange"
+                                                  Label="Rodilla"/>
+                                <chart:LineSeries ItemsSource="{Binding AnkleLinearVelocity}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Green"
+                                                  Label="Tobillo"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+                    </StackLayout>
+                </xct:Expander.Content>
+            </xct:Expander>
+
+            <!--Aceleración Lineal-->
+            <xct:Expander>
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Aceleración Lineal" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                                   FontFamily="FFS"
+                                   FontSize="20"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.Content>
+                    <StackLayout>
+                        <Label Text="Aceleración Lineal" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding HipLinearAcceleration}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Cadera"/>
+                                <chart:LineSeries ItemsSource="{Binding KneeLinearAcceleration}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Orange"
+                                                  Label="Rodilla"/>
+                                <chart:LineSeries ItemsSource="{Binding AnkleLinearAcceleration}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Green"
+                                                  Label="Tobillo"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+                    </StackLayout>
+                </xct:Expander.Content>
+            </xct:Expander>
+            <!--Velocidad Angular-->
+            <xct:Expander>
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Velocidad Angular" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                                   FontFamily="FFS"
+                                   FontSize="20"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.Content>
+                    <StackLayout>
+                        <Label Text="Curvas de velocidades angulares" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding HipAngularVelocity}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Cadera"/>
+                                <chart:LineSeries ItemsSource="{Binding KneeAngularVelocity}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Orange"
+                                                  Label="Rodilla"/>
+                                <chart:LineSeries ItemsSource="{Binding AnkleAngularVelocity}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Green"
+                                                  Label="Tobillo"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+                    </StackLayout>
+                </xct:Expander.Content>
+            </xct:Expander>
+
+            <!--Aceleración Angular-->
+            <xct:Expander>
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Aceleración Angular" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                                   FontFamily="FFS"
+                                   FontSize="20"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.Content>
+                    <StackLayout>
+                        <Label Text="Curva cinemática del tobillo" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding HipAngularAcceleration}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Cadera"/>
+                                <chart:LineSeries ItemsSource="{Binding KneeAngularAcceleration}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Orange"
+                                                  Label="Rodilla"/>
+                                <chart:LineSeries ItemsSource="{Binding AnkleAngularAcceleration}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Green"
+                                                  Label="Tobillo"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+                    </StackLayout>
+                </xct:Expander.Content>
+            </xct:Expander>
+
+            <!--Momento-->
+            <xct:Expander>
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Momentos" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                                   FontFamily="FFS"
+                                   FontSize="20"
+                                   HorizontalOptions="EndAndExpand"
+                                   Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+                <xct:Expander.Content>
+                    <StackLayout>
+                        <Label Text="Momento de Rodilla-Cadera" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding HipMoment}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Cadera"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+
+                        <Label Text="Momento Tobillo-Rodilla" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding KneeMoment}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Rodilla"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+
+                        <Label Text="Momento de Metatarso-Tobillo" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray"/>
+                        <Frame>
+                            <chart:SfChart WidthRequest="150" HeightRequest="300">
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis/>
+                                </chart:SfChart.SecondaryAxis>
+                                <chart:LineSeries ItemsSource="{Binding AnkleMoment}"
+                                                  XBindingPath="Time"
+                                                  YBindingPath="Angle"
+                                                  Color="Blue"
+                                                  Label="Tobillo"/>
+                                <chart:SfChart.Legend>
+                                    <chart:ChartLegend/>
+                                </chart:SfChart.Legend>
+                            </chart:SfChart>
+                        </Frame>
+                    </StackLayout>
+                </xct:Expander.Content>
+            </xct:Expander>
+        </StackLayout>
+    </ScrollView>
+    </Grid>
+</ContentPage>

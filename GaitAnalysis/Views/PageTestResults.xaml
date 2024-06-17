@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GaitAnalysis.Views.PageTestResults"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*" 
+          RowSpacing="0" ColumnSpacing="0" 
+          Padding="0" Margin="0" BackgroundColor="#92cace">
+
+        <!-- Encabezado fijo -->
+        <Frame Grid.Row="0" Padding="0" BackgroundColor="#92cace">
+            <StackLayout Orientation="Horizontal">
+                <Frame x:Name="Add"
+                       HasShadow="False"
+                       IsClippedToBounds="True"
+                       Padding="0"
+                       CornerRadius="50" HeightRequest="40" WidthRequest="50"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Margin="10,6,0,0"
+                       BackgroundColor="#92cace">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ComeBackCommand}" />
+                    </Frame.GestureRecognizers>
+                    <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
+                           FontFamily="FFS"
+                           FontSize="20"
+                           Margin="15,7,0,0"/>
+                </Frame>
+                <Label x:Name="lbName"
+                       Text="PRUEBAS REALIZADAS"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       Margin="70,0,0,0"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- CollectionView -->
+        <CollectionView x:Name="CollectionViewTest" ItemsSource="{Binding GetListTest}" Grid.Row="1">
+            <CollectionView.Header>
+                <BoxView HeightRequest="10" BackgroundColor="#92cace" />
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <!-- Aquí comienza el SwipeView -->
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Eliminar"
+                                           BackgroundColor="Red"
+                                           IconImageSource="TrashSolid.png"
+                                           Command="{Binding Source={x:Reference CollectionViewTest}, Path=BindingContext.DeleteTestCommand}"
+                                           CommandParameter="{Binding IdTest}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <SwipeView.Content>
+                            <!-- contenido del SwipeView -->
+                            <Grid Padding="10" BackgroundColor="#92cace">
+                                <Frame Padding="0" HeightRequest="50" CornerRadius="10" Background="#ddeff0">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference CollectionViewTest}, Path=BindingContext.NavigateToAnlysisResultsCommand}"
+                                                              CommandParameter="{Binding IdTest}" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChartLine}"
+                                               FontFamily="FFS"
+                                               FontSize="25"
+                                               VerticalOptions="Center"
+                                               TextColor="Black"
+                                               Margin="10,0,0,0"/>
+                                        <Label Text="{Binding VideoPath}"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               Margin="10,0,0,0"
+                                               VerticalOptions="Center"
+                                               TextColor="Black"/>
+                                        <Label Text="{Binding Date}"
+                                               FontSize="20"
+                                               Margin="8,0,0,0"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"
+                                               TextColor="Black"/>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </SwipeView.Content>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

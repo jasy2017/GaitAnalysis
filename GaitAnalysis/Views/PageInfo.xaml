@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="GaitAnalysis.Views.PageInfo"
+             xmlns:fontAwesome="clr-namespace:FontAwesome">
+    <ScrollView BackgroundColor="#92cace">
+        <StackLayout>
+            <Label Text="INFORMACIÓN GENERAL" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" />
+            <xct:Expander>
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100" >
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="¿Cómo grabar?" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                           FontFamily="FFS"
+                           FontSize="20"
+                           HorizontalOptions="EndAndExpand"
+                           Margin="10,10"
+                           />
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+
+                <Frame BorderColor="WhiteSmoke" CornerRadius="5" Padding="10" HeightRequest="100" Margin="20,0" >
+                    <Label Text="Con el celular" />
+                </Frame>
+            </xct:Expander>
+
+            <xct:Expander>
+
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="¿Cómo analizar la marcha?" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+                           FontFamily="FFS"
+                           FontSize="20"
+                           HorizontalOptions="EndAndExpand"
+                           Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+
+                <Frame BorderColor="WhiteSmoke" CornerRadius="5" Padding="10" HeightRequest="100" Margin="20,0">
+                    <Label Text="Ni yo sé" />
+                </Frame>
+
+            </xct:Expander>
+
+            <xct:Expander>
+
+                <xct:Expander.Header>
+                    <Frame BackgroundColor="LightBlue" Padding="5" Margin="10" CornerRadius="100">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Limitaciones de la app" HorizontalOptions="Start" FontSize="Title" Margin="10,5" TextColor="Black"/>
+                            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChevronDown}"
+               FontFamily="FFS"
+               FontSize="20"
+               HorizontalOptions="EndAndExpand"
+               Margin="10,10"/>
+                        </StackLayout>
+                    </Frame>
+                </xct:Expander.Header>
+
+                <Frame BorderColor="WhiteSmoke" CornerRadius="5" Padding="10" HeightRequest="100" Margin="20,0">
+                    <Label Text="Ni yo sé" />
+                </Frame>
+
+            </xct:Expander>
+
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <ProduceReferenceAssemblyInOutDir>true</ProduceReferenceAssemblyInOutDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="pruebaGaitAnalysis.gif" />
+    <None Remove="Resources\Fonts\FontAwesome6Brands-Regular-400.otf" />
+    <None Remove="Resources\Fonts\FontAwesome6Free-Regular-400.otf" />
+    <None Remove="Resources\Fonts\FontAwesome6Free-Solid-900.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="pruebaGaitAnalysis.gif" />
+    <EmbeddedResource Include="Resources\Fonts\FontAwesome6Brands-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\Fonts\FontAwesome6Free-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\Fonts\FontAwesome6Free-Solid-900.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="26.1.35" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="26.1.35" />
+    <PackageReference Include="Xam.Plugin.Media" Version="6.0.2" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\PageAnalysis.xaml.cs">
+      <DependentUpon>PageAnalysis.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\LoadingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageAddPatients.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageAnalysis.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageAnalysisResults.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageEditPatient.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PagePatients.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageTestResults.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TabbedPageMain.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageInfo.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

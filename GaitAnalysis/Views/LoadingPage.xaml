@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:GaitAnalysis.ViewModel"
+             x:DataType="viewmodel:VMpageAnalysis"
+             x:Class="GaitAnalysis.Views.LoadingPage"
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
+             <!---->
+    <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
+        <!-- Imagen de fondo -->
+        <Image Source="load_page.png" Aspect="AspectFill" VerticalOptions="Fill" HorizontalOptions="Fill"/>
+        <!-- ActivityIndicator sobrepuesto -->
+        <ActivityIndicator  IsRunning="True" Color="Black" VerticalOptions="Start" HorizontalOptions="Center"
+                           WidthRequest="60" HeightRequest="60"/>
+        <Label Text="Analizando..." TextColor="Black" VerticalOptions="Start" HorizontalOptions="Center" Margin="0,50,0,0"
+               FontSize="Large" FontAttributes="Bold"/>
+    </Grid>
+</ContentPage>

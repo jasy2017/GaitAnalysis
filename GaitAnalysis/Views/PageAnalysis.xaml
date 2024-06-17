@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             x:Class="GaitAnalysis.Views.PageAnalysis"
+             >
+
+    
+    <Grid>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Start" Padding="30" BackgroundColor="#92cace" >
+            <Label  Text="ANALIZAR LA MARCHA"
+                    FontAttributes="Bold" FontSize="20"
+                    Margin="0,5,0,0"
+                    VerticalTextAlignment="Center" HorizontalOptions="Center" />
+
+            <ffimageloading:CachedImage x:Name="Gif"  Source="resource://GaitAnalysis.pruebaGaitAnalysis.gif"  HeightRequest="300" />
+
+
+            <StackLayout Orientation="Horizontal" >
+                <Label  Text="Paciente:"
+                    FontAttributes="Bold" FontSize="20"
+                    Margin="0,5,0,0"
+                    VerticalOptions="Start" />
+                <combobox:SfComboBox HeightRequest="40" x:Name="comboBox" IsEditableMode="true" 
+                                     WidthRequest="230"
+                                     Watermark="Nombre"
+                                     WatermarkColor="Gray"
+                             AllowFiltering="true" MaximumDropDownHeight="150"
+                             DataSource="{Binding GetListPatients}"
+                             DisplayMemberPath="Name"
+                             SelectedItem="{Binding PickPatients, Mode=TwoWay}"
+                             TextColor="Black"
+                             BackgroundColor="WhiteSmoke"
+                             DropDownBackgroundColor="Beige"
+                             DropDownTextColor="DarkRed"
+                             SelectedDropDownItemColor="Black"
+                             IndicatorTextColor="Black">
+                    <combobox:SfComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <StackLayout Orientation="Horizontal" >
+                                    <Label Text="{Binding Name}" HeightRequest="100" WidthRequest="100" TextColor="Black"/>
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </combobox:SfComboBox.ItemTemplate>
+                </combobox:SfComboBox>
+            </StackLayout>
+            <!--StackLayout que empuja los botones para a la parte final de la página-->
+            <StackLayout VerticalOptions="FillAndExpand">
+                <!--<Button Text="Prueba"  Command="{Binding PruebaCommand}" BackgroundColor="Azure" HeightRequest="50" WidthRequest="50" TextColor="Black"/>-->
+            </StackLayout>
+
+                    
+
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween"
+                                    Padding="0" Margin="0">
+
+
+                <Frame Padding="0" Margin="0,0,0,50" HeightRequest="75" CornerRadius="25">
+                    <StackLayout Orientation="Horizontal" BackgroundColor="LightBlue"  WidthRequest="145">
+                        <Label Text="{x:Static fontAwesome:FontAwesomeIcons.ChartLine}" FontFamily="FFS" FontSize="20" Margin="5,0,0,0" VerticalOptions="Center" TextColor="Black"/>
+                        <Button Text=" Analizar" Command="{Binding GaitAnalysisCommand}" BackgroundColor="Transparent" HeightRequest="80" WidthRequest="110" TextColor="Black" Margin="0,0,0,0"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Padding="0" Margin="0,0,0,50" HeightRequest="75" CornerRadius="25">
+                    <StackLayout Orientation="Horizontal" BackgroundColor="LightBlue" WidthRequest="130">
+                        <Label Text="{x:Static fontAwesome:FontAwesomeIcons.Video}" FontFamily="FFS" FontSize="20" Margin="5,0,0,0" VerticalOptions="Center" TextColor="Black"/>
+                        <Button Text="Grabar"  Command="{Binding ShowVideoOptionsCommand}" BackgroundColor="Transparent" HeightRequest="80" WidthRequest="85" TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+                
+            </FlexLayout>
+            
+        </StackLayout>
+        
+        <!-- Pantalla de carga -->
+        <Grid x:Name="LoadingOverlay" BackgroundColor="#80000000" 
+              IsVisible="{Binding IsLoading}" 
+              VerticalOptions="FillAndExpand" 
+              HorizontalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="True" Color="White" />
+                <Label Text="Cargando..." TextColor="White" HorizontalOptions="Center" />
+            </StackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>
+
+
+

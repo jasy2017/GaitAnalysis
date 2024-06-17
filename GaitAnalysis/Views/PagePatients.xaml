@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             x:Class="GaitAnalysis.Views.PagePatients"
+             xmlns:fontAwesome="clr-namespace:FontAwesome" 
+             >
+            
+    
+    <Grid x:Name="gridContent"
+      RowDefinitions="0,60,35,10,*"
+      RowSpacing="0" ColumnSpacing="0"
+      Padding="0" Margin="0">
+
+        <CollectionView x:Name="CollectionViewPatients" ItemsSource="{Binding GetListPatients}" Grid.RowSpan="6">
+            <CollectionView.Header>
+                <BoxView HeightRequest="110"
+                BackgroundColor="#92cace" />
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <!-- Aquí comienza el SwipeView -->
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Eliminar"
+                                           BackgroundColor="Red"
+                                           IconImageSource="TrashSolid.png"
+                                           Command="{Binding Source={x:Reference CollectionViewPatients}, 
+                                                    Path=BindingContext.DeletePatientCommand}"
+                                           CommandParameter="{Binding Id}" />
+                                <SwipeItem Text="Editar"
+                                           BackgroundColor="Green"
+                                           IconImageSource="PenEdit.png"
+                                           Command="{Binding Path=BindingContext.NavigateToEditCommand,
+                                           Source={x:Reference CollectionViewPatients}}" 
+                                           CommandParameter="{Binding Id}" /> 
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <SwipeView.Content>
+                            <!-- contenido del SwipeView -->
+                            <Grid Padding="10"
+                        BackgroundColor="#92cace">
+                                <Frame Padding="0"
+                            HeightRequest="50"
+                            CornerRadius="15"
+                            Background="#ddeff0">
+                                    <!-- vincular frame con cambio de vista. Editar paciente -->
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference CollectionViewPatients},
+                                                                        Path=BindingContext.NavigateToTestCommand}"
+                                                                        CommandParameter="{Binding Id}" />
+                                        
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Padding="0"
+                                    WidthRequest="50"
+                                    HeightRequest="50"
+                                    CornerRadius="25"
+                                    Margin="25,0,0,0"
+                                    IsClippedToBounds="False">
+                                            <Image Source="USER.png"  HorizontalOptions="Center" Aspect="AspectFill"/>
+                                        </Frame>
+
+                                        <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" Margin="10,0,0,0" VerticalOptions="Center" TextColor="Black" />
+                                        <Label Text="{Binding Lastname}" FontSize="20"  Margin="8,0,0,0" FontAttributes="Bold" VerticalOptions="Center" TextColor="Black"/>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </SwipeView.Content>
+
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+       
+        <BoxView x:Name="bvHeaderBackground" Grid.RowSpan="4"
+         BackgroundColor="#92cace"
+         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        
+        <Label x:Name="lbName" Grid.Row="1"
+       Text="PACIENTES"
+       FontAttributes="Bold" FontSize="20"
+       Margin="0,5,0,0"
+       VerticalTextAlignment="Center" HorizontalOptions="Center" />
+    
+        <Frame x:Name="myFrame" Grid.Row="2"
+                HasShadow="False"
+                 IsClippedToBounds="True"
+                 Padding="0"
+                 CornerRadius="50" HeightRequest="35" WidthRequest="270"
+                   HorizontalOptions="Start"
+                 VerticalOptions="Center" Margin="90,0,0,0">
+            <SearchBar BackgroundColor="#D6DBDF" 
+                       Text="{Binding SearchText}"
+                       SearchCommand="{Binding SearchCommand}"
+                       Placeholder="Buscar"
+                       PlaceholderColor="Gray"
+                       TextColor="Black"
+                       CancelButtonColor="Black"
+                       />
+        </Frame>
+        <Frame x:Name="Add" Grid.Row="2"
+         HasShadow="False"
+         IsClippedToBounds="True"
+         Padding="0"
+         CornerRadius="50" HeightRequest="40" WidthRequest="50"
+         HorizontalOptions="Start"
+         VerticalOptions="Center"
+         Margin="30,0,0,0"
+         BackgroundColor="#92cace">
+            <!-- Enlace para ir a la vista de agregar un nuevo usuario-->
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={x:Reference CollectionViewPatients},
+                                    Path=BindingContext.NavigateToAddCommand}"
+                                    CommandParameter="{Binding Id}" />
+            </Frame.GestureRecognizers>
+            <!-- Agregar íconos de font awesome como label-->
+            <Label Text="{x:Static fontAwesome:FontAwesomeIcons.UserPlus}"
+            FontFamily="FFS"
+            FontSize="20"
+            Margin="15,7,0,0"/>
+        </Frame>
+    </Grid>
+</ContentPage>

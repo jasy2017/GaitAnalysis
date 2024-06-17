@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GaitAnalysis.Views.PageEditPatient"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             BackgroundColor="#a4f6d0">
+    <ContentPage.Content>
+        <StackLayout Padding="0" Margin="20" BackgroundColor="#a4f6d0" >
+            
+            <Frame BackgroundColor="Azure" Padding="20"  
+                    HorizontalOptions="Center"  
+                    HeightRequest="120" WidthRequest="120" CornerRadius="100"
+                    IsClippedToBounds="False">
+                <Image Source="USER.png"  Aspect="AspectFit"/>
+            </Frame>
+            <Label Text="{Binding Patient.Name}" FontSize="35" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" />
+            
+            <StackLayout  Spacing="10" Padding="0">
+                <Frame Padding="10" CornerRadius="10" BorderColor="LightBlue">
+                    <StackLayout Orientation="Horizontal">
+                        <Label  Text="{x:Static fontAwesome:FontAwesomeIcons.User}"
+            FontFamily="FFS" VerticalOptions="Center" TextColor="Black"/>
+                        <Entry Placeholder="Nombre                                                " Text="{Binding Patient.Name}" TextColor="Black" PlaceholderColor="Gray" />
+
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" CornerRadius="10" BorderColor="LightBlue">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{x:Static fontAwesome:FontAwesomeIcons.Signature}"
+            FontFamily="FFS" VerticalOptions="Center" TextColor="Black"/>
+                        <Entry Placeholder="Apellido                                              " Text="{Binding Patient.Lastname}" TextColor="Black" PlaceholderColor="Gray"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" CornerRadius="10" BorderColor="LightBlue">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{x:Static fontAwesome:FontAwesomeIcons.Calendar}"
+            FontFamily="FFS"  VerticalOptions="Center" TextColor="Black"/>
+                        <Entry Placeholder="Edad                                                     " Text="{Binding Patient.Age}" TextColor="Black" PlaceholderColor="Gray" />
+
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" CornerRadius="10" BorderColor="LightBlue">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{x:Static fontAwesome:FontAwesomeIcons.Dumbbell}"
+            FontFamily="FFS" VerticalOptions="Center" TextColor="Black"/>
+                        <Entry Placeholder="Peso (kg)                                            " Text="{Binding Patient.Weight}" TextColor="Black" PlaceholderColor="Gray"/>
+
+                    </StackLayout >
+                </Frame>
+                <Frame Padding="10" CornerRadius="10" BorderColor="LightBlue">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{x:Static fontAwesome:FontAwesomeIcons.PersonArrowUpFromLine}"
+             FontFamily="FFS" VerticalOptions="Center" TextColor="Black"/>
+                        <Entry Placeholder="Altura (cm)                                          " Text="{Binding Patient.Height}" TextColor="Black" PlaceholderColor="Gray"/>
+
+                    </StackLayout>
+                    
+                </Frame>
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween"
+                    Padding="0" Margin="40">
+                    <Button Text="CANCELAR" Command="{Binding CancelEditionCommand}" BackgroundColor="LightBlue" HeightRequest="80" WidthRequest="125" TextColor="Black" CornerRadius="15"/>
+                    <Button Text="GUARDAR"  Command="{Binding EditPatientCommand}" BackgroundColor="LightBlue" HeightRequest="80" WidthRequest="125" TextColor="Black" CornerRadius="15"/>
+                </FlexLayout>
+                
+            </StackLayout>
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GaitAnalysis.Views.TabbedPageMain"
+            xmlns:local="clr-namespace:GaitAnalysis.Views"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom" 
+            BackgroundColor="#66a9ca"
+            SelectedTabColor="Black"
+            UnselectedTabColor="Gray"
+            xmlns:fontAwesome="clr-namespace:FontAwesome" 
+            NavigationPage.HasNavigationBar="False"> <!--Elimina barra azul de navegación de páginas-->
+    <!--Pages can be added as references or inline-->
+    <local:PageInfo BackgroundColor="White" Title="Info" IconImageSource="InfoMenu.png"/>
+    <local:PageAnalysis BackgroundColor="White" Title="Análisis" IconImageSource="AnalisisMenu.png"/>
+    <local:PagePatients BackgroundColor="#92cace" Title="Pacientes" IconImageSource="PacientesMenu.png"/>
+
+</TabbedPage>
